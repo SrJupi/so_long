@@ -8,7 +8,7 @@ char	*fake_gnl(int fd)
 
 	read_result = 1;
 	str = NULL;
-	tmp = (char *) malloc (sizeof(char) * 2);
+	tmp = (char *) ft_calloc (1, sizeof(char) * 2);
 	if (tmp == NULL)
 	{
 		errno = ENOMEM;
@@ -16,7 +16,6 @@ char	*fake_gnl(int fd)
 	}
 	while (read_result > 0)
 	{
-		ft_bzero(tmp, 2);
 		read_result = read(fd, tmp, 1);
 		str = ft_strcat(str, tmp);
 		if (str == NULL)
@@ -59,20 +58,27 @@ char	*fake_gnl(int fd)
 		if (map->map == NULL)
 }*/
 
-t_map	ft_read(int fd)
+char	**ft_read(int fd)
 {
-	t_map	map_info;
 	char	*map_line;
+	char	**ret_arr;
 
-	ft_bzero(&map_info, sizeof(t_map));
 	map_line = fake_gnl(fd);
+	close(fd);
 	if (map_line == NULL)
 	{
 		perror("read");
 		exit(EXIT_FAILURE);
 	}
-	ft_putstr_fd("map line: \n", 1);
-	ft_putstr_fd(map_line, 1);
-	map_info.map = ft_split(map_line, '\n');
-	return (map_info);
+//	ft_putstr_fd("map line: \n", 1);
+//	ft_putstr_fd(map_line, 1);
+	ret_arr = ft_split(map_line, '\n');
+	free(map_line);
+	if (ret_arr == NULL)
+	{
+		errno = ENOMEM;
+		perror("split");
+		exit(EXIT_FAILURE);
+	}
+	return (ret_arr);
 }
