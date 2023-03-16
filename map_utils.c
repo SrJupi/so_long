@@ -18,34 +18,32 @@ void	clean_map(t_map *map)
 	free(map);
 }
 
-void	check_first_last(t_map *map)
+void	check_closed(t_map *map)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (map->map[0][i])
 	{
 		if (map->map[0][i] != VALID_CHAR[1]
-			||map->map[map->col - 1][i] != VALID_CHAR[1])
+			||map->map[map->lin - 1][i] != VALID_CHAR[1])
 		{
-			errno = EINVAL;
 			clean_map(map);
-			perror("Map not closed");
-			exit(EXIT_FAILURE);
+			ft_perror(EINVAL, "Map not closed");
 		}
 		i++;
 	}
-}
-
-void	check_other_lines(t_map *map)
-{
-	(void)map;
-}
-
-void	check_valid_map(t_map *map)
-{
-	check_first_last(map);
-	check_other_lines(map);
+	i = 1;
+	while (i < map->lin - 1)
+	{
+		if (map->map[i][0] != VALID_CHAR[1]
+			|| map->map[i][map->col - 1] != VALID_CHAR[1])
+		{
+			clean_map(map);
+			ft_perror(EINVAL, "Map not closed");
+		}
+		i++;
+	}
 }
 
 void	get_map_size(t_map *map)
@@ -58,33 +56,93 @@ void	get_map_size(t_map *map)
 	{
 		if (map->col != ft_strlen(map->map[i]))
 		{
-			errno = EINVAL;
 			clean_map(map);
-			perror("Map is not rectangle");
-			exit(EXIT_FAILURE);
+			ft_perror(EINVAL, "Map is not rectangle");
 		}
 		map->lin += 1;
 		i++;
 	}
 }
 
-void	check_map(t_map *map)
+int		check_char(char c)
 {
-	get_map_size(map);
-	check_valid_map(map);
+	int	i;
+
+	i = 0;
+	while (VALID_CHAR[i])
+	{
+		if (c == VALID_CHAR[i])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+void	add_to_count(char c, t_map *map)
+{
+	if (c == 'C')
+		map->collect += 1;
+	else if (c == 'E')
+		map->exit += 1;
+	else if (c == 'P')
+		map->player += 1;
+}
+
+void	check_quantities(t_map *map)
+{
+	if (map->player > 1 || map->player < 1)
+	{
+		clean_map(map);
+		ft_perror(EINVAL, "Num player");
+	}
+	if (map->exit > 1 || map->exit < 1)
+	{
+		clean_map(map);
+		ft_perror(EINVAL, "Num exit");
+	}
+	if (map->collect < 1)
+	{
+		clean_map(map);
+		ft_perror(EINVAL, "Num collect");
+	}
+}
+
+void	check_valid_char(t_map *map)
+{
+	size_t	i;
+	size_t	j;
+
+
+	i = 1;
+	while (i < map->lin - 1)
+	{
+		j = 1;
+		while (j < map->col - 1)
+		{
+			if (check_char(map->map[i][j]))
+			{
+				clean_map(map);
+				ft_perror(EINVAL, "Char not allowed");
+			}
+			if (map->map[i][j] == 'C' || map->map[i][j] == 'E'
+				|| map->map[i][j] == 'P')
+				add_to_count(map->map[i][j], map);
+			j++;
+		}
+		i++;
+	}
+	check_quantities(map);
 }
 
 void	create_map(t_map **map, char *arg)
 {
 	*map = (t_map *) ft_calloc (1, sizeof(t_map));
 	if (*map == NULL)
-	{
-		errno = ENOMEM;
-		perror ("map malloc");
-		exit(EXIT_FAILURE);
-	}
+		ft_perror(ENOMEM, "map malloc");
 	(*map)->map = ft_read(ft_open(arg));
-	check_map(*map);
+	get_map_size(*map);
+	check_closed(*map);
+	check_valid_char(*map);
 }
 
 int	main(int argc, char **argv)
@@ -95,7 +153,7 @@ int	main(int argc, char **argv)
 	my_map = NULL;
 	i = 0;
 	if (argc != 2)
-		printf("Oh oh! Not enough args!\n");
+		ft_perror(EINVAL, "Args");
 	else
 	{
 		create_map(&my_map, argv[1]);

@@ -22,33 +22,22 @@ char	*ft_strcat(char *s1, char *s2)
 	int		len1;
 	int		len2;
 
-	if (s1 == NULL)
-		len1 = 0;
-	else
-		len1 = ft_strlen(s1);
-	if (s2 == NULL)
-		len2 = 0;
-	else
-		len2 = ft_strlen(s2);
-	filepath = (char *) malloc (len1 + len2 + 1);
-	if (filepath == NULL)
-	{
-		errno = ENOMEM;
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	if (!len1 && !len2)
 		return (NULL);
-	}
+	filepath = (char *) ft_calloc (1, len1 + len2 + 1);
+	if (filepath == NULL)
+		return (NULL);
 	ft_memcpy(filepath, s1, len1);
-	ft_memcpy(filepath + len1, s2, len2 + 1);
+	ft_memcpy(filepath + len1, s2, len2);
 	return (filepath);
 }
 
-int	check_extension(char *filename)
+void	check_extension(char *filename)
 {
 	if (ft_strcmp(EXTENSION, ft_strrchr(filename, '.')))
-	{
-		errno = EINVAL;
-		return (1);
-	}
-	return (0);
+		ft_perror(EINVAL, ".ber extension");
 }
 
 int	ft_open(char *filename)
@@ -56,23 +45,13 @@ int	ft_open(char *filename)
 	char	*filepath;
 	int		fd;
 
-	if (check_extension(filename))
-	{
-		perror(".ber extension");
-		exit(EXIT_FAILURE);
-	}
+	check_extension(filename);
 	filepath = ft_strcat(MAP_FOLDER, filename);
 	if (filepath == NULL)
-	{
-		perror("strcat");
-		exit(EXIT_FAILURE);
-	}
+		ft_perror(ENOMEM, "ft_strcat");
 	fd = open(filepath, O_RDONLY);
 	free(filepath);
 	if (fd == -1)
-	{
-		perror("open");
-		exit(EXIT_FAILURE);
-	}
+		ft_perror(0, "open");
 	return (fd);
 }
