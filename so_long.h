@@ -49,5 +49,6 @@ typedef struct t_char
 int		ft_open(char *filename);
 char	*ft_strcat(char *s1, char *s2);
 char	**ft_read(int fd);
+void	ft_perror(int err, char *str);
 
 #endif
