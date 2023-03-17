@@ -1,21 +1,24 @@
 #include "so_long.h"
 #include <stdio.h>
 
-void	clean_map(t_map *map)
+//check leaks
+void	clean_map(void *map)
 {
-	int	i;
+	int		i;
+	t_map	*cast;
 
+	cast = (t_map *)map;
 	i = 0;
-	if (map->map != NULL)
+	if (cast->map != NULL)
 	{
-		while (map->map[i] != NULL)
+		while (cast->map[i] != NULL)
 		{
-			free(map->map[i]);
+			free(cast->map[i]);
 			i++;
 		}
-		free(map->map);
+		free(cast->map);
 	}
-	free(map);
+	free(cast);
 }
 
 void	check_closed(t_map *map)
@@ -119,8 +122,7 @@ void	check_valid_char(t_map *map)
 		while (j < map->col - 1)
 		{
 			if (check_char(map->map[i][j]))
-				ft_error(EINVAL, "Char not allowed", \
-				(void (*)(void *))clean_map, map);
+				ft_error(EINVAL, "Char not allowed", clean_map, map);
 			//	clean_map(map);
 			//	ft_perror(EINVAL, "Char not allowed");
 			if (map->map[i][j] == 'C' || map->map[i][j] == 'E'
@@ -142,7 +144,7 @@ void	create_map(t_map **map, char *arg)
 	get_map_size(*map);
 	check_closed(*map);
 	check_valid_char(*map);
-//	solve_map(*map);
+	solve_map(*map);
 }
 
 int	main(int argc, char **argv)

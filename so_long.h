@@ -50,9 +50,15 @@ typedef struct t_char
 	void	**points;
 }	t_char;
 
+//Open + Read functions
 int		ft_open(char *filename);
 char	*ft_strcat(char *s1, char *s2);
 char	**ft_read(int fd);
+
+//Map creation and check functions
+void	solve_map(t_map *map);
+
+//Error functions
 void	ft_perror(int err, char *str);
 void	ft_error(int err, char *msg, void (*clean_func)(void *), void *data);
 
