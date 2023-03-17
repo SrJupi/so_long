@@ -37,6 +37,6 @@ https://harm-smits.github.io/42docs/libs/minilibx
 https://aurelienbrabant.fr/blog/getting-started-with-the-minilibx
 
 ### Images
-Original sprites: https://opengameart.org/content/spelunky-inspired-tileset
+Original sprites: https://opengameart.org/content/spelunky-inspired-tileset  
 Upscaling sprites: https://lospec.com/pixel-art-scaler/
 
