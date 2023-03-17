@@ -112,7 +112,6 @@ void	check_valid_char(t_map *map)
 	size_t	i;
 	size_t	j;
 
-
 	i = 1;
 	while (i < map->lin - 1)
 	{
@@ -120,10 +119,10 @@ void	check_valid_char(t_map *map)
 		while (j < map->col - 1)
 		{
 			if (check_char(map->map[i][j]))
-			{
-				clean_map(map);
-				ft_perror(EINVAL, "Char not allowed");
-			}
+				ft_error(EINVAL, "Char not allowed", \
+				(void (*)(void *))clean_map, map);
+			//	clean_map(map);
+			//	ft_perror(EINVAL, "Char not allowed");
 			if (map->map[i][j] == 'C' || map->map[i][j] == 'E'
 				|| map->map[i][j] == 'P')
 				add_to_count(map->map[i][j], map);
@@ -143,6 +142,7 @@ void	create_map(t_map **map, char *arg)
 	get_map_size(*map);
 	check_closed(*map);
 	check_valid_char(*map);
+//	solve_map(*map);
 }
 
 int	main(int argc, char **argv)
@@ -162,5 +162,6 @@ int	main(int argc, char **argv)
 			printf("Linha %d: %s\n", i + 1, my_map->map[i]);
 			i++;
 		}
+		clean_map(my_map);
 	}
 }
