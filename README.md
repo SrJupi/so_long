@@ -2,7 +2,7 @@
 
 ## Project Development Milestones
 
-Situation: 6/17 (35%)
+Situation: 6/20 (30%)
 
 ### Open Utils
 * ✔️ Create open function that checks all the requirments to open the file.  
@@ -28,15 +28,19 @@ Situation: 6/17 (35%)
 ### Testing
 * 🔄 Test game on linux.
 * 🔄 Test game on macOs.
+### Bonus
+* 🔄 Display movement on screen (UI?).
+* 🔄 Add enemy.
+* 🔄 Add sprite animation.
 
 ## Places from where I get stuff
 
 ### Info about minilibx
 
-https://harm-smits.github.io/42docs/libs/minilibx
+https://harm-smits.github.io/42docs/libs/minilibx  
 https://aurelienbrabant.fr/blog/getting-started-with-the-minilibx
 
 ### Images
-Original sprites: https://opengameart.org/content/spelunky-inspired-tileset
+Original sprites: https://opengameart.org/content/spelunky-inspired-tileset  
 Upscaling sprites: https://lospec.com/pixel-art-scaler/
 
