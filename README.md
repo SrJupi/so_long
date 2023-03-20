@@ -2,7 +2,7 @@
 
 ## Project Development Milestones
 
-Situation: 6/20 (30%)
+Situation: 7/20 (35%)
 
 ### Open Utils
 * ✔️ Create open function that checks all the requirments to open the file.  
@@ -15,7 +15,7 @@ Situation: 6/20 (30%)
 ### Game Utils
 * 🔄 Create game function to create the t_game * struct.
 * 🔄 Create functions to fill and validate data put on t_game * struct.
-* 🔄 Create move functions.  
+* ✔️ Create move functions.  
 * 🔄 Create "camera" movement functions.
 * 🔄 Create game logic.  
 ### Error Management
