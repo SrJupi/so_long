@@ -81,14 +81,18 @@ int		check_char(char c)
 	return (1);
 }
 
-void	add_to_count(char c, t_map *map)
+void	add_to_count(char c, t_map *map, int i, int j)
 {
 	if (c == 'C')
 		map->collect += 1;
 	else if (c == 'E')
 		map->exit += 1;
 	else if (c == 'P')
+	{
 		map->player += 1;
+		map->p_x = j;
+		map->p_y = i;
+	}
 }
 
 void	check_quantities(t_map *map)
@@ -127,7 +131,7 @@ void	check_valid_char(t_map *map)
 			//	ft_perror(EINVAL, "Char not allowed");
 			if (map->map[i][j] == 'C' || map->map[i][j] == 'E'
 				|| map->map[i][j] == 'P')
-				add_to_count(map->map[i][j], map);
+				add_to_count(map->map[i][j], map, i, j);
 			j++;
 		}
 		i++;
@@ -147,7 +151,7 @@ void	create_map(t_map **map, char *arg)
 	solve_map(*map);
 }
 
-int	main(int argc, char **argv)
+/*int	main(int argc, char **argv)
 {
 	int		i;
 	t_map	*my_map;
@@ -166,4 +170,4 @@ int	main(int argc, char **argv)
 		}
 		clean_map(my_map);
 	}
-}
+}*/

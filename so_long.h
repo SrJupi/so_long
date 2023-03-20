@@ -18,6 +18,7 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <X11/keysym.h>
 # include "libft/libft.h"
 # define EXTENSION ".ber"
 # define MAP_FOLDER "maps/"
@@ -56,10 +57,14 @@ char	*ft_strcat(char *s1, char *s2);
 char	**ft_read(int fd);
 
 //Map creation and check functions
+void	create_map(t_map **map, char *str);
 void	solve_map(t_map *map);
 
 //Error functions
 void	ft_perror(int err, char *str);
 void	ft_error(int err, char *msg, void (*clean_func)(void *), void *data);
+
+//Clean functions
+void	clean_map(void *map);
 
 #endif
