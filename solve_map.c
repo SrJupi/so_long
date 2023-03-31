@@ -2,8 +2,8 @@
 
 // solve map functions
 
-void	solve_map(t_map *map)
+void	solve_map(t_game *data)
 {
-	if (map == NULL)
+	if (data == NULL)
 		return ;
 }

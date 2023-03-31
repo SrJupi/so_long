@@ -61,83 +61,62 @@ int		check_char(char c)
 	return (1);
 }
 
-void	add_to_count(char c, t_map *map, int i, int j)
+void	add_to_count(char c, t_game *data, int i, int j)
 {
 	if (c == 'C')
-		map->collect += 1;
+		data->map->collect += 1;
 	else if (c == 'E')
-		map->exit += 1;
+		data->map->exit += 1;
 	else if (c == 'P')
 	{
-		map->player += 1;
-		map->p_x = j;
-		map->p_y = i;
+		data->map->player += 1;
+		data->player.x = j;
+		data->player.y = i;
 	}
 }
 
-void	check_quantities(t_map *map)
+void	check_quantities(t_game *data)
 {
-	if (map->player > 1 || map->player < 1)
-		ft_error(EINVAL, "Num player", clean_map, map);
-	if (map->exit > 1 || map->exit < 1)
-		ft_error(EINVAL, "Num exit", clean_map, map);
-	if (map->collect < 1)
-		ft_error(EINVAL, "Num collect", clean_map, map);
-	map->f_x = map->p_x;
-	map->f_y = map->p_y;
+	if (data->map->player > 1 || data->map->player < 1)
+		ft_error(EINVAL, "Num player", clean_map, data->map);
+	if (data->map->exit > 1 || data->map->exit < 1)
+		ft_error(EINVAL, "Num exit", clean_map, data->map);
+	if (data->map->collect < 1)
+		ft_error(EINVAL, "Num collect", clean_map, data->map);
+	data->screen.x = data->player.x;
+	data->screen.y = data->player.y;
 }
 
-void	check_valid_char(t_map *map)
+void	check_valid_char(t_game *data)
 {
 	size_t	i;
 	size_t	j;
 
 	i = 1;
-	while (i < map->lin - 1)
+	while (i < data->map->lin - 1)
 	{
 		j = 1;
-		while (j < map->col - 1)
+		while (j < data->map->col - 1)
 		{
-			if (check_char(map->map[i][j]))
-				ft_error(EINVAL, "Char not allowed", clean_map, map);
-			add_to_count(map->map[i][j], map, i, j);
+			if (check_char(data->map->map[i][j]))
+				ft_error(EINVAL, "Char not allowed", clean_map, data->map);
+			add_to_count(data->map->map[i][j], data, i, j);
 			j++;
 		}
 		i++;
 	}
-	check_quantities(map);
+	check_quantities(data);
 }
 
-void	create_map(t_map **map, char *arg)
+void	create_map(t_game *data, char *arg)
 {
-	*map = (t_map *) ft_calloc (1, sizeof(t_map));
-	if (*map == NULL)
+	data->map = (t_map *) ft_calloc (1, sizeof(t_map));
+	if (data->map == NULL)
 		ft_perror(ENOMEM, "map malloc");
-	(*map)->map = ft_read(ft_open(arg));
-	get_map_size(*map);
-	check_closed(*map);
-	check_valid_char(*map);
-	solve_map(*map);
-	(*map)->update = 1;
+	data->map->map = ft_read(ft_open(arg));
+	get_map_size(data->map);
+	check_closed(data->map);
+	check_valid_char(data);
+	solve_map(data);
+	data->screen.update = 1;
 }
-
-/*int	main(int argc, char **argv)
-{
-	int		i;
-	t_map	*my_map;
-
-	my_map = NULL;
-	i = 0;
-	if (argc != 2)
-		ft_perror(EINVAL, "Args");
-	else
-	{
-		create_map(&my_map, argv[1]);
-		while (my_map->map[i])
-		{
-			printf("Linha %d: %s\n", i + 1, my_map->map[i]);
-			i++;
-		}
-		clean_map(my_map);
-	}
-}*/

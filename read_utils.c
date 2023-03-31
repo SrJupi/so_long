@@ -1,5 +1,7 @@
 #include "so_long.h"
 
+//CHECK CLOSE FILE
+
 char	*fake_gnl(int fd)
 {
 	char	*str;

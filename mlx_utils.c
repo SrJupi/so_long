@@ -10,15 +10,15 @@ void	set_image(t_game *data, int i)
 	w = &data->mlx->img_w;
 	h = &data->mlx->img_h;
 	if (i == 0)
-		img = mlx_xpm_file_to_image(data->mlx->mlx, "img/background_32.xpm", w, h);
+		img = mlx_xpm_file_to_image(data->mlx->mlx, "img/back.xpm", w, h);
 	else if (i == 1)
-		img = mlx_xpm_file_to_image(data->mlx->mlx, "img/wall_32.xpm", w, h);
+		img = mlx_xpm_file_to_image(data->mlx->mlx, "img/wall.xpm", w, h);
 	else if (i == C)
-		img = mlx_xpm_file_to_image(data->mlx->mlx, "img/collectable_32.xpm", w, h);
+		img = mlx_xpm_file_to_image(data->mlx->mlx, "img/coll.xpm", w, h);
 	else if (i == E)
-		img = mlx_xpm_file_to_image(data->mlx->mlx, "img/exit_32.xpm", w, h);
+		img = mlx_xpm_file_to_image(data->mlx->mlx, "img/exit.xpm", w, h);
 	else if (i == P)
-		img = mlx_xpm_file_to_image(data->mlx->mlx, "img/player_32.xpm", w, h);
+		img = mlx_xpm_file_to_image(data->mlx->mlx, "img/play.xpm", w, h);
 	if (img == NULL)
 		ft_error(ENOMEM, "mlx images failed", clean_game, data);
 	data->mlx->images[i] = img;
@@ -52,15 +52,10 @@ void	create_mlx(t_game *data)
 	if (data->mlx->mlx == NULL)
 		ft_error(ENOMEM, "mlx failed", clean_map, data->map);
 	ft_putstr_fd("create win\n", 1);
-	data->mlx->mlx_win = mlx_new_window(data->mlx->mlx, data->map->col * IMG_SIZE, data->map->lin * IMG_SIZE, "So LoNg!");
+	data->mlx->mlx_win = mlx_new_window(data->mlx->mlx, \
+	data->map->col * IMG_SIZE, data->map->lin * IMG_SIZE, "So LoNg!");
 	if (data->mlx->mlx_win == NULL)
 		ft_error(ENOMEM, "mlx win failed", clean_game, data);
 	ft_putstr_fd("create images\n", 1);
 	create_images(data);
-	int i = 0;
-	while (data->mlx->images[i] != NULL)
-	{
-		printf("pointer -> %p\n", data->mlx->images[i]);
-		i++;
-	}
 }

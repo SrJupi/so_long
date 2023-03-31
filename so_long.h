@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <X11/keysym.h>
+# include <X11/X.h>
 # include <mlx.h>
 # include "libft/libft.h"
 # define EXTENSION ".ber"
@@ -44,6 +45,7 @@ typedef struct s_map
 	int		p_x;
 	int		p_y;
 	int		update;
+	int		steps;
 }	t_map;
 
 typedef struct	s_mlx
@@ -53,18 +55,30 @@ typedef struct	s_mlx
 	void	**images;
 	int		img_w;
 	int		img_h;
-/*	void	*wall;
-	void	*player;
-	void	*exit;
-	void	*collect;
-	void	*back;
-	void	*empty;*/
 } t_mlx;
+
+typedef struct	s_player
+{
+	int	x;
+	int	y;
+	int	steps;
+} t_player;
+
+typedef struct	s_screen
+{
+	int	x;
+	int	y;
+	int	update;
+	int	update_x;
+	int	update_y;
+} t_screen;
 
 typedef struct	s_game
 {
-	t_mlx	*mlx;
-	t_map	*map;
+	t_mlx		*mlx;
+	t_map		*map;
+	t_player	player;
+	t_screen	screen;
 } t_game;
 
 //Open + Read functions
@@ -73,11 +87,18 @@ char	*ft_strcat(char *s1, char *s2);
 char	**ft_read(int fd);
 
 //Map creation and check functions
-void	create_map(t_map **map, char *str);
-void	solve_map(t_map *map);
+void	create_map(t_game *map, char *str);
+void	solve_map(t_game *map);
 
 //Mlx creation
 void	create_mlx(t_game *data);
+
+//Input functions
+int	handle_keypress(int key, t_game *data);
+int	close_window(t_game *data);
+
+//Display functions
+int	draw_map(t_game *data);
 
 //Error functions
 void	ft_perror(int err, char *str);
