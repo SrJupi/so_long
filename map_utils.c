@@ -1,26 +1,6 @@
 #include "so_long.h"
 #include <stdio.h>
 
-//check leaks
-void	clean_map(void *map)
-{
-	int		i;
-	t_map	*cast;
-
-	cast = (t_map *)map;
-	i = 0;
-	if (cast->map != NULL)
-	{
-		while (cast->map[i] != NULL)
-		{
-			free(cast->map[i]);
-			i++;
-		}
-		free(cast->map);
-	}
-	free(cast);
-}
-
 void	check_closed(t_map *map)
 {
 	size_t	i;
@@ -98,20 +78,13 @@ void	add_to_count(char c, t_map *map, int i, int j)
 void	check_quantities(t_map *map)
 {
 	if (map->player > 1 || map->player < 1)
-	{
-		clean_map(map);
-		ft_perror(EINVAL, "Num player");
-	}
+		ft_error(EINVAL, "Num player", clean_map, map);
 	if (map->exit > 1 || map->exit < 1)
-	{
-		clean_map(map);
-		ft_perror(EINVAL, "Num exit");
-	}
+		ft_error(EINVAL, "Num exit", clean_map, map);
 	if (map->collect < 1)
-	{
-		clean_map(map);
-		ft_perror(EINVAL, "Num collect");
-	}
+		ft_error(EINVAL, "Num collect", clean_map, map);
+	map->f_x = map->p_x;
+	map->f_y = map->p_y;
 }
 
 void	check_valid_char(t_map *map)
@@ -127,11 +100,7 @@ void	check_valid_char(t_map *map)
 		{
 			if (check_char(map->map[i][j]))
 				ft_error(EINVAL, "Char not allowed", clean_map, map);
-			//	clean_map(map);
-			//	ft_perror(EINVAL, "Char not allowed");
-			if (map->map[i][j] == 'C' || map->map[i][j] == 'E'
-				|| map->map[i][j] == 'P')
-				add_to_count(map->map[i][j], map, i, j);
+			add_to_count(map->map[i][j], map, i, j);
 			j++;
 		}
 		i++;
@@ -149,6 +118,7 @@ void	create_map(t_map **map, char *arg)
 	check_closed(*map);
 	check_valid_char(*map);
 	solve_map(*map);
+	(*map)->update = 1;
 }
 
 /*int	main(int argc, char **argv)

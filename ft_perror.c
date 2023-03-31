@@ -2,6 +2,7 @@
 
 void	ft_perror(int err, char *msg)
 {
+	ft_putstr_fd("Error\n", STDERR_FILENO);
 	if (err)
 		errno = err;
 	perror(msg);

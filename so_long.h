@@ -19,18 +19,19 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <X11/keysym.h>
+# include <mlx.h>
 # include "libft/libft.h"
 # define EXTENSION ".ber"
 # define MAP_FOLDER "maps/"
 # define VALID_CHAR "01CEP"
+# define C 2
+# define E 3
+# define P 4
+# define SCREEN_W 15
+# define SCREEN_H 9
+# define IMG_SIZE 32
 
-typedef struct t_coord
-{
-	int	x;
-	int	y;
-}	t_coord;
-
-typedef struct t_map
+typedef struct s_map
 {
 	char	**map;
 	size_t	col;
@@ -42,14 +43,29 @@ typedef struct t_map
 	int		f_y;
 	int		p_x;
 	int		p_y;
+	int		update;
 }	t_map;
 
-typedef struct t_char
+typedef struct	s_mlx
 {
-	void	**numbers;
-	void	**letters;
-	void	**points;
-}	t_char;
+	void	*mlx;
+	void	*mlx_win;
+	void	**images;
+	int		img_w;
+	int		img_h;
+/*	void	*wall;
+	void	*player;
+	void	*exit;
+	void	*collect;
+	void	*back;
+	void	*empty;*/
+} t_mlx;
+
+typedef struct	s_game
+{
+	t_mlx	*mlx;
+	t_map	*map;
+} t_game;
 
 //Open + Read functions
 int		ft_open(char *filename);
@@ -60,11 +76,15 @@ char	**ft_read(int fd);
 void	create_map(t_map **map, char *str);
 void	solve_map(t_map *map);
 
+//Mlx creation
+void	create_mlx(t_game *data);
+
 //Error functions
 void	ft_perror(int err, char *str);
 void	ft_error(int err, char *msg, void (*clean_func)(void *), void *data);
 
 //Clean functions
 void	clean_map(void *map);
+void	clean_game(void *data);
 
 #endif
