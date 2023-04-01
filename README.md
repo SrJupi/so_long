@@ -22,7 +22,7 @@ Situation: 10/20 (50%)
 * ✔️ Create exclusive clean functions for each struct.
 * ✔️ Create general function to close game with error occurs.
 ### Graphic Resources
-* 🔄 Try to understang how minilibx works.
+* 🔄 Try to understand how minilibx works.
 * ✔️ Find art for the game.
 * 🔄 Find art for UI.
 ### Testing
@@ -33,7 +33,7 @@ Situation: 10/20 (50%)
 * 🔄 Add enemy.
 * 🔄 Add sprite animation.
 
-## Places from where I get stuff
+## Places from where I got stuff
 
 ### Info about minilibx
 
