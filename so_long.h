@@ -40,12 +40,12 @@ typedef struct s_map
 	size_t	player;
 	size_t	collect;
 	size_t	exit;
-	int		f_x;
-	int		f_y;
-	int		p_x;
-	int		p_y;
-	int		update;
-	int		steps;
+//	int		f_x;
+//	int		f_y;
+//	int		p_x;
+//	int		p_y;
+//	int		update;
+//	int		steps;
 }	t_map;
 
 typedef struct	s_mlx

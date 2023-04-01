@@ -53,7 +53,7 @@ void	create_mlx(t_game *data)
 		ft_error(ENOMEM, "mlx failed", clean_map, data->map);
 	ft_putstr_fd("create win\n", 1);
 	data->mlx->mlx_win = mlx_new_window(data->mlx->mlx, \
-	data->map->col * IMG_SIZE, data->map->lin * IMG_SIZE, "So LoNg!");
+	SCREEN_W * IMG_SIZE, SCREEN_H * IMG_SIZE, "So LoNg!");
 	if (data->mlx->mlx_win == NULL)
 		ft_error(ENOMEM, "mlx win failed", clean_game, data);
 	ft_putstr_fd("create images\n", 1);

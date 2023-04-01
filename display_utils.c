@@ -19,36 +19,38 @@
 }
 */
 
-// NOT WORKING =(
 void	aux_scroll(t_game *data)
 {
-	char	c;
+	int		i = 0;
+	int		j;
 	int		x;
 	int		y;
+	char	c;
 
-	y = data->screen.y - 4;
-	while(y <= data->screen.y + 4)
+	while(i < SCREEN_H)
 	{
-		x = data->screen.x - 7;
-		while(x <= data->screen.x + 7)
+		j = 0;
+		while(j < SCREEN_W)
 		{
-			if (x < 0 || x >= (int)data->map->col || y < 0 || y >= (int)data->map->lin)
-				c = '1';
+			x = data->screen.x - SCREEN_W / 2 + j;
+			y = data->screen.y - SCREEN_H / 2 + i;
+			if (x < 0 || y < 0 || x >= (int)data->map->col || y >= (int)data->map->lin)
+				c = '0';
 			else
 				c = data->map->map[y][x];
 			if (c == 'P')
-				mlx_put_image_to_window(data->mlx->mlx, data->mlx->mlx_win, data->mlx->images[4], x * IMG_SIZE, y * IMG_SIZE);
+				mlx_put_image_to_window(data->mlx->mlx, data->mlx->mlx_win, data->mlx->images[4], j * IMG_SIZE, i * IMG_SIZE);
 			if (c == '1')
-				mlx_put_image_to_window(data->mlx->mlx, data->mlx->mlx_win, data->mlx->images[1], x * IMG_SIZE, y * IMG_SIZE);
+				mlx_put_image_to_window(data->mlx->mlx, data->mlx->mlx_win, data->mlx->images[1], j * IMG_SIZE, i * IMG_SIZE);
 			if (c == '0')
-				mlx_put_image_to_window(data->mlx->mlx, data->mlx->mlx_win, data->mlx->images[0], x * IMG_SIZE, y * IMG_SIZE);
+				mlx_put_image_to_window(data->mlx->mlx, data->mlx->mlx_win, data->mlx->images[0], j * IMG_SIZE, i * IMG_SIZE);
 			if (c == 'C')
-				mlx_put_image_to_window(data->mlx->mlx, data->mlx->mlx_win, data->mlx->images[2], x * IMG_SIZE, y * IMG_SIZE);
+				mlx_put_image_to_window(data->mlx->mlx, data->mlx->mlx_win, data->mlx->images[2], j * IMG_SIZE, i * IMG_SIZE);
 			if (c == 'E')
-				mlx_put_image_to_window(data->mlx->mlx, data->mlx->mlx_win, data->mlx->images[3], x * IMG_SIZE, y * IMG_SIZE);
-			x++;
+				mlx_put_image_to_window(data->mlx->mlx, data->mlx->mlx_win, data->mlx->images[3], j * IMG_SIZE, i * IMG_SIZE);
+			j++;
 		}
-		y++;
+		i++;
 	}
 }
 
@@ -94,8 +96,8 @@ int	draw_map(t_game *data)
 		ft_putstr_fd(" - y: ", 1);
 		ft_putnbr_fd(data->screen.y, 1);
 		ft_putchar_fd('\n', 1);
-		aux_draw(data->map, data->mlx);
-		//aux_scroll(data);
+		//aux_draw(data->map, data->mlx);
+		aux_scroll(data);
 		
 		data->screen.update = 0;
 	}
