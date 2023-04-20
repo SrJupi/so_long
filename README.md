@@ -2,7 +2,7 @@
 
 ## Project Development Milestones
 
-Situation mandatory: 12/16 (75%)
+Situation mandatory: 12/16 (75%)  
 Situation bonus: 0/4 (0%)
 
 ### Open Utils
