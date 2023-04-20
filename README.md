@@ -2,7 +2,8 @@
 
 ## Project Development Milestones
 
-Situation: 10/20 (50%)
+Situation mandatory: 12/16 (75%)
+Situation bonus: 0/4 (0%)
 
 ### Open Utils
 * ✔️ Create open function that checks all the requirments to open the file.  
@@ -16,15 +17,14 @@ Situation: 10/20 (50%)
 * ✔️ Create game function to create the t_game * struct.
 * ✔️ Create functions to fill and validate data put on t_game * struct.
 * ✔️ Create move functions.  
-* 🔄 Create "camera" movement functions.
-* 🔄 Create game logic.  
+* ✔️ Create "camera" movement functions.
+* ✔️ Create game logic.  
 ### Error Management
 * ✔️ Create exclusive clean functions for each struct.
 * ✔️ Create general function to close game with error occurs.
 ### Graphic Resources
 * 🔄 Try to understand how minilibx works.
 * ✔️ Find art for the game.
-* 🔄 Find art for UI.
 ### Testing
 * 🔄 Test game on linux.
 * 🔄 Test game on macOs.
@@ -32,6 +32,7 @@ Situation: 10/20 (50%)
 * 🔄 Display movement on screen (UI?).
 * 🔄 Add enemy.
 * 🔄 Add sprite animation.
+* 🔄 Find art for UI.
 
 ## Places from where I got stuff
 
