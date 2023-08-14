@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   open_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lsulzbac <lsulzbac@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/17 19:28:14 by lsulzbac          #+#    #+#             */
+/*   Updated: 2023/08/14 11:32:10 by lsulzbac         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 int	ft_strcmp(char *s1, char *s2)
@@ -16,7 +28,7 @@ int	ft_strcmp(char *s1, char *s2)
 	return (0);
 }
 
-char	*ft_strcat(char *s1, char *s2)
+char	*ft_strcat(char *s1, char *s2, int clean_it)
 {
 	char	*filepath;
 	int		len1;
@@ -31,6 +43,8 @@ char	*ft_strcat(char *s1, char *s2)
 		return (NULL);
 	ft_memcpy(filepath, s1, len1);
 	ft_memcpy(filepath + len1, s2, len2);
+	if (clean_it && s1 != NULL)
+		free(s1);
 	return (filepath);
 }
 
@@ -46,7 +60,7 @@ int	ft_open(char *filename)
 	int		fd;
 
 	check_extension(filename);
-	filepath = ft_strcat(MAP_FOLDER, filename);
+	filepath = ft_strcat(MAP_FOLDER, filename, 0);
 	if (filepath == NULL)
 		ft_perror(ENOMEM, "ft_strcat");
 	fd = open(filepath, O_RDONLY);

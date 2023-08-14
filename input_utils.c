@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lsulzbac <lsulzbac@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/14 11:31:38 by lsulzbac          #+#    #+#             */
+/*   Updated: 2023/08/14 11:31:40 by lsulzbac         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void	update_player(int x, int y, t_game *data)
@@ -12,13 +24,13 @@ void	update_player(int x, int y, t_game *data)
 void	update_screen(t_game *data)
 {
 	data->screen.update = 1;
-	if (data->player.x - data->screen.x < -4)
+	if (data->player.x - data->screen.x < -(SCREEN_W / 2 - SCREEN_B))
 		data->screen.x--;
-	if (data->player.x - data->screen.x > 4)
+	if (data->player.x - data->screen.x > (SCREEN_W / 2 - SCREEN_B))
 		data->screen.x++;
-	if (data->player.y - data->screen.y < -2)
+	if (data->player.y - data->screen.y < -(SCREEN_H / 2 - SCREEN_B))
 		data->screen.y--;
-	if (data->player.y - data->screen.y > 2)
+	if (data->player.y - data->screen.y > (SCREEN_H / 2 - SCREEN_B))
 		data->screen.y++;
 }
 
@@ -26,7 +38,6 @@ void	move_function(int x, int y, t_game *data)
 {
 	if (data->map->exit == 0)
 		return ;
-	//check move pos
 	if (data->map->map[data->player.y + y][data->player.x + x] == '1')
 		return ;
 	if (data->map->map[data->player.y + y][data->player.x + x] == 'E'
@@ -35,33 +46,33 @@ void	move_function(int x, int y, t_game *data)
 	if (data->map->map[data->player.y + y][data->player.x + x] == 'C')
 		data->map->collect -= 1;
 	if (data->map->map[data->player.y + y][data->player.x + x] == 'E')
-		data->map->exit -= 1;	
+		data->map->exit -= 1;
 	update_player(x, y, data);
 	update_screen(data);
-	ft_putstr_fd("\rCollectables: ", 1);
-	ft_putnbr_fd(data->map->collect, 1);
-	ft_putstr_fd("- Steps: ", 1);
+	ft_putstr_fd("Steps: ", 1);
 	ft_putnbr_fd(data->player.steps, 1);
+	ft_putchar_fd('\r', 1);
 }
 
 int	close_window(t_game *data)
 {
 	clean_game(data);
+	ft_putchar_fd('\n', 1);
 	exit(EXIT_SUCCESS);
 	return (0);
 }
 
 int	handle_keypress(int key, t_game *data)
 {
-	if (key == XK_Escape)
+	if (key == 53 || key == 0xff1b)
 		close_window(data);
-	else if (key == XK_w)
+	else if (key == 13 || key == 0x0077)
 		move_function(0, -1, data);
-	else if (key == XK_s)
+	else if (key == 1 || key == 0x0073)
 		move_function(0, 1, data);
-	else if (key == XK_a)
+	else if (key == 0 || key == 0x0061)
 		move_function(-1, 0, data);
-	else if (key == XK_d)
+	else if (key == 2 || key == 0x0064)
 		move_function(1, 0, data);
 	return (0);
 }

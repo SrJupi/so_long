@@ -10,12 +10,12 @@ SRC = main.c read_utils.c open_utils.c map_utils.c ft_perror.c solve_map.c clean
 OBJ = $(SRC:.c=.o)
 
 %.o : %.c
-	$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	$(CC) $(CFLAGS) -Imlx -O3 -c $< -o $@
 
 all: lib $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -L./libft -lft -o $(NAME)
+	$(CC) $(OBJ) -Lmlx_dynamic -lmlx -framework OpenGL -framework AppKit -L./libft -lft -o $(NAME)
 	@echo "So long compiled!"
 
 clean:

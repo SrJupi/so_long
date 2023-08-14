@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   display_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lsulzbac <lsulzbac@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/14 11:31:24 by lsulzbac          #+#    #+#             */
+/*   Updated: 2023/08/14 11:31:26 by lsulzbac         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 /*int	draw_win(t_mlx *data)
@@ -21,16 +33,17 @@
 
 void	aux_scroll(t_game *data)
 {
-	int		i = 0;
+	int		i;
 	int		j;
 	int		x;
 	int		y;
 	char	c;
 
-	while(i < SCREEN_H)
+	i = 0;
+	while (i < SCREEN_H)
 	{
 		j = 0;
-		while(j < SCREEN_W)
+		while (j < SCREEN_W)
 		{
 			x = data->screen.x - SCREEN_W / 2 + j;
 			y = data->screen.y - SCREEN_H / 2 + i;
@@ -54,51 +67,40 @@ void	aux_scroll(t_game *data)
 	}
 }
 
-void	aux_draw(t_map *map, t_mlx *data)
-{
-	int		i = 0;
-	int		j;
-	char	c;
+// void	aux_draw(t_map *map, t_mlx *data)
+// {
+// 	int		i;
+// 	int		j;
+// 	char	c;
 
-	while(map->map[i])
-	{
-		j = 0;
-		while(map->map[i][j])
-		{
-			c = map->map[i][j];
-			if (c == 'P')
-				mlx_put_image_to_window(data->mlx, data->mlx_win, data->images[4], j * IMG_SIZE, i * IMG_SIZE);
-			if (c == '1')
-				mlx_put_image_to_window(data->mlx, data->mlx_win, data->images[1], j * IMG_SIZE, i * IMG_SIZE);
-			if (c == '0')
-				mlx_put_image_to_window(data->mlx, data->mlx_win, data->images[0], j * IMG_SIZE, i * IMG_SIZE);
-			if (c == 'C')
-				mlx_put_image_to_window(data->mlx, data->mlx_win, data->images[2], j * IMG_SIZE, i * IMG_SIZE);
-			if (c == 'E')
-				mlx_put_image_to_window(data->mlx, data->mlx_win, data->images[3], j * IMG_SIZE, i * IMG_SIZE);
-			j++;
-		}
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (map->map[i])
+// 	{
+// 		j = 0;
+// 		while (map->map[i][j])
+// 		{
+// 			c = map->map[i][j];
+// 			if (c == 'P')
+// 				mlx_put_image_to_window(data->mlx, data->mlx_win, data->images[4], j * IMG_SIZE, i * IMG_SIZE);
+// 			if (c == '1')
+// 				mlx_put_image_to_window(data->mlx, data->mlx_win, data->images[1], j * IMG_SIZE, i * IMG_SIZE);
+// 			if (c == '0')
+// 				mlx_put_image_to_window(data->mlx, data->mlx_win, data->images[0], j * IMG_SIZE, i * IMG_SIZE);
+// 			if (c == 'C')
+// 				mlx_put_image_to_window(data->mlx, data->mlx_win, data->images[2], j * IMG_SIZE, i * IMG_SIZE);
+// 			if (c == 'E')
+// 				mlx_put_image_to_window(data->mlx, data->mlx_win, data->images[3], j * IMG_SIZE, i * IMG_SIZE);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }
 
 int	draw_map(t_game *data)
 {
 	if (data->screen.update)
 	{
-		
-		ft_putstr_fd("player position: x: ", 1);
-		ft_putnbr_fd(data->player.x, 1);
-		ft_putstr_fd(" - y: ", 1);
-		ft_putnbr_fd(data->player.y, 1);
-		ft_putstr_fd("\nfocus position: x: ", 1);
-		ft_putnbr_fd(data->screen.x, 1);
-		ft_putstr_fd(" - y: ", 1);
-		ft_putnbr_fd(data->screen.y, 1);
-		ft_putchar_fd('\n', 1);
-		//aux_draw(data->map, data->mlx);
 		aux_scroll(data);
-		
 		data->screen.update = 0;
 	}
 //	if (data->map->exit == 0)

@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   clean_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lsulzbac <lsulzbac@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/14 11:30:59 by lsulzbac          #+#    #+#             */
+/*   Updated: 2023/08/14 11:31:01 by lsulzbac         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-//check leaks
 void	clean_map(void *map)
 {
 	int		i;
@@ -27,7 +38,6 @@ void	clean_images(t_mlx *mlx)
 	i = 0;
 	while (mlx->images[i] != NULL)
 	{
-		//clean image function from mlx
 		mlx_destroy_image(mlx->mlx, mlx->images[i]);
 		i++;
 	}
@@ -43,8 +53,6 @@ void	clean_mlx(void *mlx)
 		clean_images(cast);
 	if (cast->mlx_win != NULL)
 		mlx_destroy_window(cast->mlx, cast->mlx_win);
-	if (cast->mlx != NULL)
-		mlx_destroy_display(cast->mlx);
 	free(cast);
 }
 

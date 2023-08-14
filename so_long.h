@@ -6,7 +6,7 @@
 /*   By: lsulzbac <lsulzbac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 12:42:37 by lsulzbac          #+#    #+#             */
-/*   Updated: 2023/02/15 12:42:09 by lsulzbac         ###   ########.fr       */
+/*   Updated: 2023/04/13 11:37:04 by lsulzbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <stdio.h>
-# include <X11/keysym.h>
-# include <X11/X.h>
+//# include <X11/keysym.h>
+//# include <X11/X.h>
 # include <mlx.h>
 # include "libft/libft.h"
 # define EXTENSION ".ber"
@@ -30,6 +30,7 @@
 # define P 4
 # define SCREEN_W 15
 # define SCREEN_H 9
+# define SCREEN_B 3
 # define IMG_SIZE 32
 
 typedef struct s_map
@@ -40,12 +41,6 @@ typedef struct s_map
 	size_t	player;
 	size_t	collect;
 	size_t	exit;
-//	int		f_x;
-//	int		f_y;
-//	int		p_x;
-//	int		p_y;
-//	int		update;
-//	int		steps;
 }	t_map;
 
 typedef struct	s_mlx
@@ -69,8 +64,6 @@ typedef struct	s_screen
 	int	x;
 	int	y;
 	int	update;
-	int	update_x;
-	int	update_y;
 } t_screen;
 
 typedef struct	s_game
@@ -83,7 +76,7 @@ typedef struct	s_game
 
 //Open + Read functions
 int		ft_open(char *filename);
-char	*ft_strcat(char *s1, char *s2);
+char	*ft_strcat(char *s1, char *s2, int clean_it);
 char	**ft_read(int fd);
 
 //Map creation and check functions
