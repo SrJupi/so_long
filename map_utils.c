@@ -41,6 +41,7 @@ void	create_map(t_game *data, char *arg)
 	get_map_size(data->map);
 	check_closed(data->map);
 	check_valid_char(data);
+	ft_putstr_fd("Before solve\n", 1);
 	solve_map(data);
 	data->screen.info = 1;
 }

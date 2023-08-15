@@ -38,16 +38,14 @@ void	clean_map(void *map)
 
 	cast = (t_map *)map;
 	i = 0;
-	if (cast->map != NULL)
+	if (cast != NULL)
 	{
-		while (cast->map[i] != NULL)
-		{
-			free(cast->map[i]);
-			i++;
-		}
-		free(cast->map);
+		if (cast->map != NULL)
+			clean_array(cast->map);
+		if (cast->copy_map != NULL)
+			clean_array(cast->copy_map);
+		free(cast);
 	}
-	free(cast);
 }
 
 void	clean_images(t_mlx *mlx)
@@ -68,11 +66,14 @@ void	clean_mlx(void *mlx)
 	t_mlx	*cast;
 
 	cast = (t_mlx *)mlx;
-	if (cast->images != NULL)
-		clean_images(cast);
-	if (cast->mlx_win != NULL)
-		mlx_destroy_window(cast->mlx, cast->mlx_win);
-	free(cast);
+	if (cast != NULL)
+	{
+		if (cast->images != NULL)
+			clean_images(cast);
+		if (cast->mlx_win != NULL)
+			mlx_destroy_window(cast->mlx, cast->mlx_win);
+		free(cast);
+	}
 }
 
 void	clean_game(void *data)
@@ -80,6 +81,9 @@ void	clean_game(void *data)
 	t_game	*cast;
 
 	cast = (t_game *)data;
-	clean_map(cast->map);
-	clean_mlx(cast->mlx);
+	if (cast != NULL)
+	{
+		clean_map(cast->map);
+		clean_mlx(cast->mlx);
+	}
 }
