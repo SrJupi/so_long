@@ -28,12 +28,6 @@ char	*fake_gnl(int fd)
 		ft_perror(ENOMEM, "read");
 	}
 	read_result = read(fd, tmp, 1);
-	if (read_result == 0)
-	{
-		free(tmp);
-		close(fd);
-		ft_perror(EINVAL, "Empty map");
-	}
 	while (read_result > 0)
 	{
 		str = ft_strcat(str, tmp, 1);
@@ -45,7 +39,6 @@ char	*fake_gnl(int fd)
 		}
 		read_result = read(fd, tmp, 1);
 	}
-	close(fd);
 	free(tmp);
 	return (str);
 }
@@ -57,6 +50,8 @@ char	**ft_read(int fd)
 
 	map_line = fake_gnl(fd);
 	close(fd);
+	if (map_line == NULL)
+		ft_perror(EINVAL, "Empty map");
 	ret_arr = ft_split(map_line, '\n');
 	free(map_line);
 	if (ret_arr == NULL)

@@ -14,16 +14,16 @@
 
 void	init_structs(t_game *data, char *argv)
 {
-	data->player.steps = 0;
+	data->player.info = 0;
 	create_map(data, argv);
 	create_mlx(data);
 }
 
 void	do_game_magic(t_game *data)
 {
-	mlx_hook(data->mlx->mlx_win, 2, 1L<<0, &handle_keypress, data);
+	mlx_hook(data->mlx->mlx_win, 2, 1L << 0, &handle_keypress, data);
 	mlx_loop_hook(data->mlx->mlx, &draw_map, data);
-	mlx_hook(data->mlx->mlx_win, 17, 1L<<17, close_window, data);
+	mlx_hook(data->mlx->mlx_win, 17, 1L << 17, close_window, data);
 	mlx_loop(data->mlx->mlx);
 }
 

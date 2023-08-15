@@ -36,6 +36,7 @@
 typedef struct s_map
 {
 	char	**map;
+	char	**copy_map;
 	size_t	col;
 	size_t	lin;
 	size_t	player;
@@ -43,36 +44,29 @@ typedef struct s_map
 	size_t	exit;
 }	t_map;
 
-typedef struct	s_mlx
+typedef struct s_mlx
 {
 	void	*mlx;
 	void	*mlx_win;
 	void	**images;
 	int		img_w;
 	int		img_h;
-} t_mlx;
+}	t_mlx;
 
-typedef struct	s_player
+typedef struct s_coord
 {
 	int	x;
 	int	y;
-	int	steps;
-} t_player;
+	int	info;
+}	t_coord;
 
-typedef struct	s_screen
-{
-	int	x;
-	int	y;
-	int	update;
-} t_screen;
-
-typedef struct	s_game
+typedef struct s_game
 {
 	t_mlx		*mlx;
 	t_map		*map;
-	t_player	player;
-	t_screen	screen;
-} t_game;
+	t_coord		player;
+	t_coord		screen;
+}	t_game;
 
 //Open + Read functions
 int		ft_open(char *filename);
@@ -81,23 +75,27 @@ char	**ft_read(int fd);
 
 //Map creation and check functions
 void	create_map(t_game *map, char *str);
+void	check_closed(t_map *map);
+void	check_valid_char(t_game *data);
+
 void	solve_map(t_game *map);
 
 //Mlx creation
 void	create_mlx(t_game *data);
 
 //Input functions
-int	handle_keypress(int key, t_game *data);
-int	close_window(t_game *data);
+int		handle_keypress(int key, t_game *data);
+int		close_window(t_game *data);
 
 //Display functions
-int	draw_map(t_game *data);
+int		draw_map(t_game *data);
 
 //Error functions
 void	ft_perror(int err, char *str);
 void	ft_error(int err, char *msg, void (*clean_func)(void *), void *data);
 
 //Clean functions
+void	clean_array(void *array);
 void	clean_map(void *map);
 void	clean_game(void *data);
 

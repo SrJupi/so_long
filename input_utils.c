@@ -18,12 +18,12 @@ void	update_player(int x, int y, t_game *data)
 	data->map->map[data->player.y][data->player.x] = '0';
 	data->player.x += x;
 	data->player.y += y;
-	data->player.steps += 1;
+	data->player.info += 1;
 }
 
 void	update_screen(t_game *data)
 {
-	data->screen.update = 1;
+	data->screen.info = 1;
 	if (data->player.x - data->screen.x < -(SCREEN_W / 2 - SCREEN_B))
 		data->screen.x--;
 	if (data->player.x - data->screen.x > (SCREEN_W / 2 - SCREEN_B))
@@ -50,7 +50,7 @@ void	move_function(int x, int y, t_game *data)
 	update_player(x, y, data);
 	update_screen(data);
 	ft_putstr_fd("Steps: ", 1);
-	ft_putnbr_fd(data->player.steps, 1);
+	ft_putnbr_fd(data->player.info, 1);
 	ft_putchar_fd('\r', 1);
 }
 

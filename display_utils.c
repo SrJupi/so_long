@@ -98,10 +98,10 @@ void	aux_scroll(t_game *data)
 
 int	draw_map(t_game *data)
 {
-	if (data->screen.update)
+	if (data->screen.info)
 	{
 		aux_scroll(data);
-		data->screen.update = 0;
+		data->screen.info = 0;
 	}
 //	if (data->map->exit == 0)
 //		return (draw_win(data));

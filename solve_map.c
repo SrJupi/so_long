@@ -17,4 +17,5 @@ void	solve_map(t_game *data)
 {
 	if (data == NULL)
 		return ;
+	clean_array(data->map->copy_map);
 }

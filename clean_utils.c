@@ -12,6 +12,25 @@
 
 #include "so_long.h"
 
+void	clean_array(void *array)
+{
+	int		i;
+	char	**cast;
+
+	cast = (char **)array;
+	i = 0;
+	if (cast != NULL)
+	{
+		while (cast[i] != NULL)
+		{
+			free(cast[i]);
+			i++;
+		}
+		free(cast);
+		cast = NULL;
+	}
+}
+
 void	clean_map(void *map)
 {
 	int		i;

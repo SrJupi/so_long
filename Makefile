@@ -6,7 +6,7 @@ lib = libft/libft.a
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = main.c read_utils.c open_utils.c map_utils.c ft_perror.c solve_map.c clean_utils.c mlx_utils.c input_utils.c display_utils.c
+SRC = main.c read_utils.c open_utils.c map_utils.c ft_perror.c solve_map.c clean_utils.c mlx_utils.c input_utils.c display_utils.c check_map.c
 OBJ = $(SRC:.c=.o)
 
 %.o : %.c
@@ -14,7 +14,7 @@ OBJ = $(SRC:.c=.o)
 
 all: lib $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): lib $(OBJ)
 	$(CC) $(OBJ) -Lmlx_dynamic -lmlx -framework OpenGL -framework AppKit -L./libft -lft -o $(NAME)
 	@echo "So long compiled!"
 
@@ -27,3 +27,7 @@ fclean:
 
 lib: 
 	make -C libft
+
+re:
+	make fclean
+	make $(NAME)
