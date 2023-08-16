@@ -36,7 +36,7 @@ void	update_screen(t_game *data)
 
 void	move_function(int x, int y, t_game *data)
 {
-	if (data->map->exit == 0)
+	if (!data->map->exit)
 		return ;
 	if (data->map->map[data->player.y + y][data->player.x + x] == '1')
 		return ;
@@ -49,14 +49,15 @@ void	move_function(int x, int y, t_game *data)
 		data->map->exit -= 1;
 	update_player(x, y, data);
 	update_screen(data);
-	ft_putstr_fd("Steps: ", 1);
+	ft_putstr_fd("\rSteps: ", 1);
 	ft_putnbr_fd(data->player.info, 1);
-	ft_putchar_fd('\r', 1);
+	//ft_putchar_fd('\n', 1);
 }
 
 int	close_window(t_game *data)
 {
-	clean_game(data);
+	//clean_game(data);
+	(void)data;
 	ft_putchar_fd('\n', 1);
 	exit(EXIT_SUCCESS);
 	return (0);

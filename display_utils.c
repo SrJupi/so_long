@@ -17,7 +17,6 @@ int	draw_win(t_game *data)
 	int	i;
 	int	j;
 
-	data->map->exit -= 1;
 	i = 0;
 	while (i < SCREEN_H)
 	{
@@ -83,8 +82,8 @@ int	draw_map(t_game *data)
 	{
 		display_screen(data);
 		data->screen.info = 0;
+		if(!data->map->exit)
+			draw_win(data);
 	}
-	if (!data->map->exit)
-		draw_win(data);
 	return (0);
 }
