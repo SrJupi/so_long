@@ -4,18 +4,20 @@ CC = gcc
 
 lib = libft/libft.a
 
+libmlx = mlx/libmlx.a 
+
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = main.c read_utils.c open_utils.c map_utils.c ft_perror.c solve_map.c clean_utils.c mlx_utils.c input_utils.c display_utils.c check_map.c
+SRC = main.c read_utils.c open_utils.c map_utils.c ft_perror.c solve_map.c clean_utils.c mlx_utils.c input_utils.c display_utils.c check_map.c image_utils.c
 OBJ = $(SRC:.c=.o)
 
 %.o : %.c
 	$(CC) $(CFLAGS) -Imlx -O3 -c $< -o $@
 
-all: lib $(NAME)
+all: $(NAME)
 
-$(NAME): lib $(OBJ)
-	$(CC) $(OBJ) -Lmlx_dynamic -lmlx -framework OpenGL -framework AppKit -L./libft -lft -o $(NAME)
+$(NAME): libmlx lib $(OBJ)
+	$(CC) $(OBJ) -L./mlx -lmlx -framework OpenGL -framework AppKit -L./libft -lft -o $(NAME)
 	@echo "So long compiled!"
 
 clean:
@@ -24,10 +26,12 @@ clean:
 fclean:
 	rm -rf $(NAME) $(OBJ)
 	make fclean -C libft
+	make clean -C mlx
 
 lib: 
 	make -C libft
 
-re:
-	make fclean
-	make $(NAME)
+libmlx:
+	make -C mlx
+
+re:	fclean all

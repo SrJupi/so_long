@@ -12,32 +12,57 @@
 
 #include "so_long.h"
 
-/*int	draw_win(t_mlx *data)
+int	draw_win(t_game *data)
 {
-	int	i = 0;
+	int	i;
 	int	j;
-	
-	while(data->map->map[i])
+
+	data->map->exit -= 1;
+	i = 0;
+	while (i < SCREEN_H)
 	{
 		j = 0;
-		while (data->map->map[i][j])
+		while (j < SCREEN_W)
 		{
-			mlx_put_image_to_window(data->mlx, data->mlx_win, data->empty, j * IMG_SIZE, i * IMG_SIZE);
+			if ((i + j) % 2 == 0)
+				put_collectable(data, j, i);
+			else
+				put_rock(data, j, i);
 			j++;
 		}
 		i++;
 	}
 	return (0);
 }
-*/
 
-void	aux_scroll(t_game *data)
+void	aux_scroll(t_game *data, int i, int j)
 {
-	int		i;
-	int		j;
 	int		x;
 	int		y;
 	char	c;
+
+	x = data->screen.x - SCREEN_W / 2 + j;
+	y = data->screen.y - SCREEN_H / 2 + i;
+	if (x < 0 || y < 0 || x >= (int)data->map->col || y >= (int)data->map->lin)
+		c = '0';
+	else
+		c = data->map->map[y][x];
+	if (c == 'P')
+		put_player(data, j, i);
+	if (c == '1')
+		put_rock(data, j, i);
+	if (c == '0')
+		put_empty(data, j, i);
+	if (c == 'C')
+		put_collectable(data, j, i);
+	if (c == 'E')
+		put_exit(data, j, i);
+}
+
+void	display_screen(t_game *data)
+{
+	int		i;
+	int		j;
 
 	i = 0;
 	while (i < SCREEN_H)
@@ -45,65 +70,21 @@ void	aux_scroll(t_game *data)
 		j = 0;
 		while (j < SCREEN_W)
 		{
-			x = data->screen.x - SCREEN_W / 2 + j;
-			y = data->screen.y - SCREEN_H / 2 + i;
-			if (x < 0 || y < 0 || x >= (int)data->map->col || y >= (int)data->map->lin)
-				c = '0';
-			else
-				c = data->map->map[y][x];
-			if (c == 'P')
-				mlx_put_image_to_window(data->mlx->mlx, data->mlx->mlx_win, data->mlx->images[4], j * IMG_SIZE, i * IMG_SIZE);
-			if (c == '1')
-				mlx_put_image_to_window(data->mlx->mlx, data->mlx->mlx_win, data->mlx->images[1], j * IMG_SIZE, i * IMG_SIZE);
-			if (c == '0')
-				mlx_put_image_to_window(data->mlx->mlx, data->mlx->mlx_win, data->mlx->images[0], j * IMG_SIZE, i * IMG_SIZE);
-			if (c == 'C')
-				mlx_put_image_to_window(data->mlx->mlx, data->mlx->mlx_win, data->mlx->images[2], j * IMG_SIZE, i * IMG_SIZE);
-			if (c == 'E')
-				mlx_put_image_to_window(data->mlx->mlx, data->mlx->mlx_win, data->mlx->images[3], j * IMG_SIZE, i * IMG_SIZE);
+			aux_scroll(data, i, j);
 			j++;
 		}
 		i++;
 	}
 }
 
-// void	aux_draw(t_map *map, t_mlx *data)
-// {
-// 	int		i;
-// 	int		j;
-// 	char	c;
-
-// 	i = 0;
-// 	while (map->map[i])
-// 	{
-// 		j = 0;
-// 		while (map->map[i][j])
-// 		{
-// 			c = map->map[i][j];
-// 			if (c == 'P')
-// 				mlx_put_image_to_window(data->mlx, data->mlx_win, data->images[4], j * IMG_SIZE, i * IMG_SIZE);
-// 			if (c == '1')
-// 				mlx_put_image_to_window(data->mlx, data->mlx_win, data->images[1], j * IMG_SIZE, i * IMG_SIZE);
-// 			if (c == '0')
-// 				mlx_put_image_to_window(data->mlx, data->mlx_win, data->images[0], j * IMG_SIZE, i * IMG_SIZE);
-// 			if (c == 'C')
-// 				mlx_put_image_to_window(data->mlx, data->mlx_win, data->images[2], j * IMG_SIZE, i * IMG_SIZE);
-// 			if (c == 'E')
-// 				mlx_put_image_to_window(data->mlx, data->mlx_win, data->images[3], j * IMG_SIZE, i * IMG_SIZE);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
-
 int	draw_map(t_game *data)
 {
 	if (data->screen.info)
 	{
-		aux_scroll(data);
+		display_screen(data);
 		data->screen.info = 0;
 	}
-//	if (data->map->exit == 0)
-//		return (draw_win(data));
+	if (!data->map->exit)
+		draw_win(data);
 	return (0);
 }

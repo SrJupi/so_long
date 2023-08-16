@@ -90,6 +90,13 @@ int		close_window(t_game *data);
 //Display functions
 int		draw_map(t_game *data);
 
+//Aux Display Images
+void	put_collectable(t_game *data, int j, int i);
+void	put_player(t_game *data, int j, int i);
+void	put_rock(t_game *data, int j, int i);
+void	put_empty(t_game *data, int j, int i);
+void	put_exit(t_game *data, int j, int i);
+
 //Error functions
 void	ft_perror(int err, char *str);
 void	ft_error(int err, char *msg, void (*clean_func)(void *), void *data);
