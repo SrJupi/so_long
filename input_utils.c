@@ -51,12 +51,11 @@ void	move_function(int x, int y, t_game *data)
 	update_screen(data);
 	ft_putstr_fd("\rSteps: ", 1);
 	ft_putnbr_fd(data->player.info, 1);
-	//ft_putchar_fd('\n', 1);
 }
 
 int	close_window(t_game *data)
 {
-	//clean_game(data);
+	clean_game(data);
 	(void)data;
 	ft_putchar_fd('\n', 1);
 	exit(EXIT_SUCCESS);

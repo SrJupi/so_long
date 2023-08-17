@@ -33,11 +33,9 @@ void	clean_array(void *array)
 
 void	clean_map(void *map)
 {
-	int		i;
 	t_map	*cast;
 
 	cast = (t_map *)map;
-	i = 0;
 	if (cast != NULL)
 	{
 		if (cast->map != NULL)
@@ -72,6 +70,8 @@ void	clean_mlx(void *mlx)
 			clean_images(cast);
 		if (cast->mlx_win != NULL)
 			mlx_destroy_window(cast->mlx, cast->mlx_win);
+		if (cast->mlx != NULL)
+			mlx_destroy_display(cast->mlx);
 		free(cast);
 	}
 }
