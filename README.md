@@ -2,7 +2,7 @@
 
 ## Project Development Milestones
 
-Situation mandatory: 12/16 (75%)  
+Situation mandatory: 16/16 (100%)  
 Situation bonus: 0/4 (0%)
 
 ### Open Utils
@@ -12,7 +12,7 @@ Situation bonus: 0/4 (0%)
 ### Map Utils
 * ✔️ Create map function to create the t_map * struct.
 * ✔️ Create all check functions to validate map.
-* 🔄 Create backtracking function to check if there is a valid path.  
+* ✔️ Create backtracking function to check if there is a valid path.  
 ### Game Utils
 * ✔️ Create game function to create the t_game * struct.
 * ✔️ Create functions to fill and validate data put on t_game * struct.
@@ -23,11 +23,11 @@ Situation bonus: 0/4 (0%)
 * ✔️ Create exclusive clean functions for each struct.
 * ✔️ Create general function to close game with error occurs.
 ### Graphic Resources
-* 🔄 Try to understand how minilibx works.
+* ✔️ Try to understand how minilibx works.
 * ✔️ Find art for the game.
 ### Testing
-* 🔄 Test game on linux.
-* 🔄 Test game on macOs.
+* ✔️ Test game on linux.
+* ✔️ Test game on macOs.
 ### Bonus
 * 🔄 Display movement on screen (UI?).
 * 🔄 Add enemy.
