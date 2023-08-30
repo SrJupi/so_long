@@ -6,7 +6,7 @@
 /*   By: lsulzbac <lsulzbac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 11:30:59 by lsulzbac          #+#    #+#             */
-/*   Updated: 2023/08/14 11:31:01 by lsulzbac         ###   ########.fr       */
+/*   Updated: 2023/08/30 18:04:21 by lsulzbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ void	clean_mlx(void *mlx)
 			clean_images(cast);
 		if (cast->mlx_win != NULL)
 			mlx_destroy_window(cast->mlx, cast->mlx_win);
-		if (cast->mlx != NULL)
-			mlx_destroy_display(cast->mlx);
 		free(cast);
 	}
 }

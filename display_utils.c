@@ -6,7 +6,7 @@
 /*   By: lsulzbac <lsulzbac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 11:31:24 by lsulzbac          #+#    #+#             */
-/*   Updated: 2023/08/14 11:31:26 by lsulzbac         ###   ########.fr       */
+/*   Updated: 2023/08/30 18:08:21 by lsulzbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	draw_map(t_game *data)
 	{
 		display_screen(data);
 		data->screen.info = 0;
-		if(!data->map->exit)
+		if (!data->map->exit)
 			draw_win(data);
 	}
 	return (0);

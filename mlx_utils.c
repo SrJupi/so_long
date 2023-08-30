@@ -6,7 +6,7 @@
 /*   By: lsulzbac <lsulzbac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 11:32:02 by lsulzbac          #+#    #+#             */
-/*   Updated: 2023/08/14 11:32:04 by lsulzbac         ###   ########.fr       */
+/*   Updated: 2023/08/30 18:16:47 by lsulzbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ void	set_image(t_game *data, int i)
 	w = &data->mlx->img_w;
 	h = &data->mlx->img_h;
 	if (i == 0)
-		img = mlx_xpm_file_to_image(data->mlx->mlx, "img/back.xpm", w, h);
+		img = mlx_xpm_file_to_image(data->mlx->mlx, "textures/back.xpm", w, h);
 	else if (i == 1)
-		img = mlx_xpm_file_to_image(data->mlx->mlx, "img/wall.xpm", w, h);
+		img = mlx_xpm_file_to_image(data->mlx->mlx, "textures/wall.xpm", w, h);
 	else if (i == C)
-		img = mlx_xpm_file_to_image(data->mlx->mlx, "img/coll.xpm", w, h);
+		img = mlx_xpm_file_to_image(data->mlx->mlx, "textures/coll.xpm", w, h);
 	else if (i == E)
-		img = mlx_xpm_file_to_image(data->mlx->mlx, "img/exit.xpm", w, h);
+		img = mlx_xpm_file_to_image(data->mlx->mlx, "textures/exit.xpm", w, h);
 	else if (i == P)
-		img = mlx_xpm_file_to_image(data->mlx->mlx, "img/play.xpm", w, h);
+		img = mlx_xpm_file_to_image(data->mlx->mlx, "textures/play.xpm", w, h);
 	if (img == NULL)
 		ft_error(ENOMEM, "mlx images failed", clean_game, data);
 	data->mlx->images[i] = img;
