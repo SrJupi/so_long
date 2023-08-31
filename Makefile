@@ -22,6 +22,7 @@ $(NAME): libmlx lib $(OBJ)
 
 clean:
 	rm -rf $(OBJ)
+	make clean -C libft
 
 fclean:
 	rm -rf $(NAME) $(OBJ)
@@ -35,3 +36,5 @@ libmlx:
 	make -C mlx
 
 re:	fclean all
+
+.PHONY: all re clean fclean

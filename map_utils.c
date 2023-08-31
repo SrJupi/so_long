@@ -6,12 +6,11 @@
 /*   By: lsulzbac <lsulzbac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 11:31:53 by lsulzbac          #+#    #+#             */
-/*   Updated: 2023/08/14 11:31:57 by lsulzbac         ###   ########.fr       */
+/*   Updated: 2023/08/31 11:28:00 by lsulzbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-// #include <stdio.h>
 
 void	get_map_size(t_map *map)
 {
