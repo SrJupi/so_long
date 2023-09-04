@@ -16,7 +16,7 @@ OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): libmlx lib $(OBJ)
+$(NAME): $(libmlx) $(lib) $(OBJ)
 	$(CC) $(OBJ) -L./mlx -lmlx -framework OpenGL -framework AppKit -L./libft -lft -o $(NAME)
 	@echo "So long compiled!"
 
@@ -29,10 +29,10 @@ fclean:
 	make fclean -C libft
 	make clean -C mlx
 
-lib: 
+$(lib): 
 	make -C libft
 
-libmlx:
+$(libmlx):
 	make -C mlx
 
 re:	fclean all
