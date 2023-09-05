@@ -6,13 +6,11 @@
 /*   By: lsulzbac <lsulzbac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 11:32:14 by lsulzbac          #+#    #+#             */
-/*   Updated: 2023/08/14 11:32:17 by lsulzbac         ###   ########.fr       */
+/*   Updated: 2023/09/05 15:43:08 by lsulzbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-//CHECK CLOSE FILE
 
 char	*fake_gnl(int fd)
 {

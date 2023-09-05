@@ -6,7 +6,7 @@
 /*   By: lsulzbac <lsulzbac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 11:32:21 by lsulzbac          #+#    #+#             */
-/*   Updated: 2023/08/14 11:32:22 by lsulzbac         ###   ########.fr       */
+/*   Updated: 2023/09/05 15:46:15 by lsulzbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	solve_map(t_game *data)
 	int	coll_exit;
 
 	coll_exit = data->map->collect + 1;
-	if (!backtrack_map(data->map->copy_map, 
+	if (!backtrack_map(data->map->copy_map,
 			data->player.x,
 			data->player.y,
 			&coll_exit))

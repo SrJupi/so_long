@@ -6,7 +6,7 @@
 /*   By: lsulzbac <lsulzbac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 12:42:37 by lsulzbac          #+#    #+#             */
-/*   Updated: 2023/04/13 11:37:04 by lsulzbac         ###   ########.fr       */
+/*   Updated: 2023/09/05 15:40:13 by lsulzbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <stdio.h>
-//# include <X11/keysym.h>
-//# include <X11/X.h>
 # include <mlx.h>
 # include "libft/libft.h"
 # define EXTENSION ".ber"

@@ -2,39 +2,43 @@ NAME = so_long
 
 CC = gcc
 
-lib = libft/libft.a
+CFLAGS = -Wall -Wextra -Werror -MMD
 
-libmlx = mlx/libmlx.a 
+ft = libft/libft.a
 
-CFLAGS = -Wall -Wextra -Werror
+mlx = mlx/libmlx.a  
 
 SRC = main.c read_utils.c open_utils.c map_utils.c ft_perror.c solve_map.c clean_utils.c mlx_utils.c input_utils.c display_utils.c check_map.c image_utils.c
 OBJ = $(SRC:.c=.o)
+DEP = $(SRC:.c=.d)
 
 %.o : %.c
-	$(CC) $(CFLAGS) -Imlx -O3 -c $< -o $@
+	$(CC) $(CFLAGS) -Imlx -Ilibft -O3 -c $< -o $@
 
-all: $(NAME)
+all: lib libmlx $(NAME)
 
-$(NAME): $(libmlx) $(lib) $(OBJ)
+$(NAME): $(OBJ) $(ft) $(mlx)
 	$(CC) $(OBJ) -L./mlx -lmlx -framework OpenGL -framework AppKit -L./libft -lft -o $(NAME)
 	@echo "So long compiled!"
 
+
+lib: 
+	make -C libft
+
+libmlx:
+	make -C mlx
+
 clean:
-	rm -rf $(OBJ)
+	rm -rf $(OBJ) $(DEP)
 	make clean -C libft
 
 fclean:
-	rm -rf $(NAME) $(OBJ)
+	rm -rf $(NAME) $(OBJ) $(DEP)
 	make fclean -C libft
-	make clean -C mlx
-
-$(lib): 
-	make -C libft
-
-$(libmlx):
-	make -C mlx
+	make clean -C mlx	
 
 re:	fclean all
+
+-include $(DEP)
 
 .PHONY: all re clean fclean
