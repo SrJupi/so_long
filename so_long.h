@@ -64,6 +64,7 @@ typedef struct s_game
 	t_map		*map;
 	t_coord		player;
 	t_coord		screen;
+	t_coord		exit;
 }	t_game;
 
 //Open + Read functions

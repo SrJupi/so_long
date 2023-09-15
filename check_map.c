@@ -45,7 +45,12 @@ void	add_to_count(char c, t_game *data, int i, int j)
 	if (c == 'C')
 		data->map->collect += 1;
 	else if (c == 'E')
+	{
 		data->map->exit += 1;
+		data->exit.x = j;
+		data->exit.y = i;
+		data->exit.info = 0;
+	}
 	else if (c == 'P')
 	{
 		data->map->player += 1;

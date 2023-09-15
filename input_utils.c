@@ -6,7 +6,7 @@
 /*   By: lsulzbac <lsulzbac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 11:31:38 by lsulzbac          #+#    #+#             */
-/*   Updated: 2023/08/14 11:31:40 by lsulzbac         ###   ########.fr       */
+/*   Updated: 2023/09/15 17:45:19 by lsulzbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,19 @@
 
 void	update_player(int x, int y, t_game *data)
 {
+	int	was_exit;
+
+	was_exit = data->map->map[data->player.y + y][data->player.x + x] == 'E';
 	data->map->map[data->player.y + y][data->player.x + x] = 'P';
-	data->map->map[data->player.y][data->player.x] = '0';
+	if (data->exit.info)
+	{
+		data->map->map[data->player.y][data->player.x] = 'E';
+		data->exit.info = 0;
+	}
+	else
+		data->map->map[data->player.y][data->player.x] = '0';
+	if (was_exit)
+		data->exit.info = 1;
 	data->player.x += x;
 	data->player.y += y;
 	data->player.info += 1;
@@ -40,12 +51,10 @@ void	move_function(int x, int y, t_game *data)
 		return ;
 	if (data->map->map[data->player.y + y][data->player.x + x] == '1')
 		return ;
-	if (data->map->map[data->player.y + y][data->player.x + x] == 'E'
-		&& data->map->collect > 0)
-		return ;
 	if (data->map->map[data->player.y + y][data->player.x + x] == 'C')
 		data->map->collect -= 1;
-	if (data->map->map[data->player.y + y][data->player.x + x] == 'E')
+	if (data->map->map[data->player.y + y][data->player.x + x] == 'E'
+		&& data->map->collect == 0)
 		data->map->exit -= 1;
 	update_player(x, y, data);
 	update_screen(data);
@@ -56,7 +65,6 @@ void	move_function(int x, int y, t_game *data)
 int	close_window(t_game *data)
 {
 	clean_game(data);
-	(void)data;
 	ft_putchar_fd('\n', 1);
 	exit(EXIT_SUCCESS);
 	return (0);
