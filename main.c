@@ -31,6 +31,7 @@ int	main(int argc, char **argv)
 {
 	t_game	data;
 
+	ft_bzero(&data, sizeof(t_game));
 	if (argc != 2)
 		ft_perror(EINVAL, "./so_long [MAP.ber]");
 	init_structs(&data, argv[1]);

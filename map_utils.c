@@ -36,10 +36,11 @@ void	create_map(t_game *data, char *arg)
 	if (data->map == NULL)
 		ft_perror(ENOMEM, "map malloc");
 	data->map->map = ft_read(ft_open(arg));
-	data->map->copy_map = ft_read(ft_open(arg));
 	get_map_size(data->map);
-	check_closed(data->map);
 	check_valid_char(data);
+	check_closed(data);
+	data->map->map = ft_read(ft_open(arg));
 	solve_map(data);
+	data->map->map = ft_read(ft_open(arg));
 	data->screen.info = 1;
 }

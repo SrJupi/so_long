@@ -8,7 +8,8 @@ ft = libft/libft.a
 
 mlx = mlx/libmlx.a  
 
-SRC = main.c read_utils.c open_utils.c map_utils.c ft_perror.c solve_map.c clean_utils.c mlx_utils.c input_utils.c display_utils.c check_map.c image_utils.c
+SRC = main.c read_utils.c open_utils.c map_utils.c ft_perror.c solve_map.c clean_utils.c mlx_utils.c input_utils.c display_utils.c check_map.c image_utils.c check_closed.c
+
 OBJ = $(SRC:.c=.o)
 DEP = $(SRC:.c=.d)
 

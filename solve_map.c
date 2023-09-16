@@ -54,9 +54,10 @@ void	solve_map(t_game *data)
 	int	coll_exit;
 
 	coll_exit = data->map->collect + 1;
-	if (!backtrack_map(data->map->copy_map,
+	if (!backtrack_map(data->map->map,
 			data->player.x,
 			data->player.y,
 			&coll_exit))
 		ft_error(EINVAL, "Map not solvable", clean_game, data);
+	clean_array(data->map->map);
 }

@@ -34,7 +34,6 @@
 typedef struct s_map
 {
 	char	**map;
-	char	**copy_map;
 	size_t	col;
 	size_t	lin;
 	size_t	player;
@@ -74,7 +73,7 @@ char	**ft_read(int fd);
 
 //Map creation and check functions
 void	create_map(t_game *map, char *str);
-void	check_closed(t_map *map);
+void	check_closed(t_game *data);
 void	check_valid_char(t_game *data);
 
 void	solve_map(t_game *map);

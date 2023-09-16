@@ -40,8 +40,6 @@ void	clean_map(void *map)
 	{
 		if (cast->map != NULL)
 			clean_array(cast->map);
-		if (cast->copy_map != NULL)
-			clean_array(cast->copy_map);
 		free(cast);
 	}
 }
@@ -66,6 +64,7 @@ void	clean_mlx(void *mlx)
 	cast = (t_mlx *)mlx;
 	if (cast != NULL)
 	{
+		ft_putstr_fd("clean mlx\n",1);
 		if (cast->images != NULL)
 			clean_images(cast);
 		if (cast->mlx_win != NULL)

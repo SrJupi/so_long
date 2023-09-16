@@ -12,34 +12,6 @@
 
 #include "so_long.h"
 
-void	check_closed(t_map *map)
-{
-	size_t	i;
-
-	i = 0;
-	while (map->map[0][i])
-	{
-		if (map->map[0][i] != VALID_CHAR[1]
-			||map->map[map->lin - 1][i] != VALID_CHAR[1])
-		{
-			clean_map(map);
-			ft_perror(EINVAL, "Map not closed");
-		}
-		i++;
-	}
-	i = 1;
-	while (i < map->lin - 1)
-	{
-		if (map->map[i][0] != VALID_CHAR[1]
-			|| map->map[i][map->col - 1] != VALID_CHAR[1])
-		{
-			clean_map(map);
-			ft_perror(EINVAL, "Map not closed");
-		}
-		i++;
-	}
-}
-
 void	add_to_count(char c, t_game *data, int i, int j)
 {
 	if (c == 'C')
