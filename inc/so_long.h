@@ -6,7 +6,7 @@
 /*   By: lsulzbac <lsulzbac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 12:42:37 by lsulzbac          #+#    #+#             */
-/*   Updated: 2023/09/05 15:40:13 by lsulzbac         ###   ########.fr       */
+/*   Updated: 2023/09/18 10:35:52 by lsulzbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,4 @@ void	clean_array(void *array);
 void	clean_map(void *map);
 void	clean_game(void *data);
 
-
-void	print_map(char **map);
 #endif
