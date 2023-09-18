@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <mlx.h>
-# include "libft/libft.h"
+# include <libft.h>
 # define EXTENSION ".ber"
 # define MAP_FOLDER "maps/"
 # define VALID_CHAR "01CEP"
@@ -75,6 +75,7 @@ char	**ft_read(int fd);
 void	create_map(t_game *map, char *str);
 void	check_closed(t_game *data);
 void	check_valid_char(t_game *data);
+char	**copy_map(t_map *map);
 
 void	solve_map(t_game *map);
 
@@ -104,4 +105,6 @@ void	clean_array(void *array);
 void	clean_map(void *map);
 void	clean_game(void *data);
 
+
+void	print_map(char **map);
 #endif

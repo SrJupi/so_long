@@ -39,8 +39,6 @@ void	create_map(t_game *data, char *arg)
 	get_map_size(data->map);
 	check_valid_char(data);
 	check_closed(data);
-	data->map->map = ft_read(ft_open(arg));
 	solve_map(data);
-	data->map->map = ft_read(ft_open(arg));
 	data->screen.info = 1;
 }

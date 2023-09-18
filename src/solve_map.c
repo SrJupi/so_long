@@ -6,7 +6,7 @@
 /*   By: lsulzbac <lsulzbac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 11:32:21 by lsulzbac          #+#    #+#             */
-/*   Updated: 2023/09/05 15:46:15 by lsulzbac         ###   ########.fr       */
+/*   Updated: 2023/09/18 09:23:24 by lsulzbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,19 @@ int	backtrack_map(char **map, int x, int y, int *coll_exit)
 
 void	solve_map(t_game *data)
 {
-	int	coll_exit;
+	int		coll_exit;
+	char	**tmp_map;
 
+	tmp_map = copy_map(data->map);
 	coll_exit = data->map->collect + 1;
 	if (!backtrack_map(data->map->map,
 			data->player.x,
 			data->player.y,
 			&coll_exit))
-		ft_error(EINVAL, "Map not solvable", clean_game, data);
+	{
+		clean_array(tmp_map);
+		ft_error(EINVAL, "Map not solvable", clean_map, data->map);
+	}
 	clean_array(data->map->map);
+	data->map->map = tmp_map;
 }
