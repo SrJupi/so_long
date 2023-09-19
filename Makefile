@@ -25,7 +25,7 @@ OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 DEP = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.d))
 
 # Compile SRC files and move to folders
-$(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
+$(OBJ_DIR)/%.o : $(SRC_DIR)/%.c $(INC_DIR)/so_long.h
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -Imlx -Ilibft -I$(INC_DIR) -O3 -c $< -o $@
 	@mkdir -p $(DEP_DIR)
