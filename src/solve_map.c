@@ -12,26 +12,6 @@
 
 #include "so_long.h"
 
-void	print_map(char **map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			ft_putchar_fd(map[i][j], 1);
-			j++;
-		}
-		ft_putchar_fd('\n', 1);
-		i++;
-	}
-	ft_putchar_fd('\n', 1);
-}
-
 int	backtrack_map(char **map, int x, int y, int *coll_exit)
 {
 	if (map[y][x] == '1')

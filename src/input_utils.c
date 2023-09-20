@@ -58,8 +58,6 @@ void	move_function(int x, int y, t_game *data)
 		data->map->exit -= 1;
 	update_player(x, y, data);
 	update_screen(data);
-	ft_putstr_fd("\rSteps: ", 1);
-	ft_putnbr_fd(data->player.info, 1);
 }
 
 int	close_window(t_game *data)

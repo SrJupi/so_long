@@ -81,6 +81,8 @@ int	draw_map(t_game *data)
 	if (data->screen.info)
 	{
 		display_screen(data);
+		ft_putstr_fd("\rSteps: ", 1);
+		ft_putnbr_fd(data->player.info, 1);
 		data->screen.info = 0;
 		if (!data->map->exit)
 			draw_win(data);
