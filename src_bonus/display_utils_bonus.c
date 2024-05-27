@@ -94,6 +94,12 @@ void	display_screen(t_game *data)
 		}
 		i++;
 	}
+	//Need refactor and is ugly
+	char *steps = ft_strjoin("Steps: ", ft_itoa(data->steps));
+	mlx_string_put(data->mlx->mlx, data->mlx->mlx_win,  data->mlx->img_w / 2, (SCREEN_H * data->mlx->img_h) - data->mlx->img_h,  0xFFFFFF, steps);
+	char *lives = ft_strjoin("Lives: ", ft_itoa(data->player.info));
+	mlx_string_put(data->mlx->mlx, data->mlx->mlx_win,  (SCREEN_W * data->mlx->img_w) - data->mlx->img_w * 4, (SCREEN_H * data->mlx->img_h) - data->mlx->img_h,  0xFFFFFF, lives);
+
 	data->last_update = get_milliseconds();
 }
 

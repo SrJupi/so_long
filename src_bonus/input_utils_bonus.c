@@ -53,6 +53,11 @@ void	lose_live(t_game *data)
 		data->is_game_over = 1;
 		draw_lose(data);
 	}
+	ft_putstr_fd("Steps: ", 1);
+	ft_putnbr_fd(data->steps, 1);
+	ft_putstr_fd("; Lives: ", 1);
+	ft_putnbr_fd(data->player.info, 1);
+	ft_putstr_fd("\n", 1);
 }
 
 void	move_function(int x, int y, t_game *data)
@@ -72,8 +77,7 @@ void	move_function(int x, int y, t_game *data)
 	update_screen(data);
 	ft_putstr_fd("Steps: ", 1);
 	ft_putnbr_fd(data->steps, 1);
-	ft_putstr_fd(" - : ", 1);
-	ft_putstr_fd("Lives: ", 1);
+	ft_putstr_fd("; Lives: ", 1);
 	ft_putnbr_fd(data->player.info, 1);
 	ft_putstr_fd("\n", 1);
 }
