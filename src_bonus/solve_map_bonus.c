@@ -10,31 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
-
-void	print_map(char **map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			ft_putchar_fd(map[i][j], 1);
-			j++;
-		}
-		ft_putchar_fd('\n', 1);
-		i++;
-	}
-	ft_putchar_fd('\n', 1);
-}
+#include "so_long_bonus.h"
 
 int	backtrack_map(char **map, int x, int y, int *coll_exit)
 {
-	if (map[y][x] == '1')
+	if (map[y][x] == '1' || map[y][x] == 'X')
 		return (0);
 	if (map[y][x] == 'C' || map[y][x] == 'E')
 		(*coll_exit) -= 1;

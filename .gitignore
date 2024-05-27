@@ -1,7 +1,7 @@
-*_bonus*
 .DS*
 *.o
 *.d
 so_long
+so_long_bonus
 *.a
 .vscode/
